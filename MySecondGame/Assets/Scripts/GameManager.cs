@@ -37,6 +37,19 @@ public class GameManager : MonoBehaviour
         enemiesclone.transform.SetParent(storage);
     }
 
+    public void Replay()
+    {
+        menu.ChangeReplay(true);
+        for (int x = 0; x < storage.childCount; x++)
+        {
+            Destroy(storage.GetChild(x).gameObject);
+        }
+        GameObject enemiesclone = Instantiate(enemies) as GameObject;
+        enemiesclone.transform.position = new Vector3(-5, 4, 0);
+        enemiesclone.transform.SetParent(storage);
+        state = "Play";
+    }
+
     public void Die()
     {
         state = "Dead";
@@ -47,14 +60,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         menu.ChangePause(true);
-        music.StopSoundtrack();
+        //music.StopSoundtrack();
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1;
         menu.ChangePause(false);
-        music.PlaySoundtrack();
+        //music.PlaySoundtrack();
     }
 
     public void Quit()

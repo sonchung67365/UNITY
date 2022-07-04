@@ -37,9 +37,4 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    void Score()
-    {
-
-    }
 }

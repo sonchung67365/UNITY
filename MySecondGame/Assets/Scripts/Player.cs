@@ -23,36 +23,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-        FireProjectile();
+        if (GameManager.state == "Play")
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
+            FireProjectile();
+        }
     }
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(speed * horizontal, speed * vertical);
-        
-        if (Projectile.numOfCombo == 1)
+        if (GameManager.state == "Play")
         {
-            timer += Time.deltaTime;
-            Debug.Log("Timer" + timer);
-        }
-        if (Projectile.numOfCombo == 2)
-        {
-            if (timer <= timeToCombo)
-            {
-                GameManager.scoreCombo++;
-                if (GameManager.scoreCombo >= 7) { GameManager.scoreCombo = 7; }
-                GameManager.score += GameManager.scoreCombo;
-                Projectile.numOfCombo = 1;
-            }
-            if (timer > timeToCombo)
-            {
-                GameManager.scoreCombo = 0;
-                Projectile.numOfCombo = 0;
-            }
-            timer = 0;
-            Debug.Log("Set timer = 0");
+            rb.velocity = new Vector2(speed * horizontal, speed * vertical);
+            Score();
         }
     }
 
@@ -85,6 +69,32 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
             gameObject.transform.position = new Vector3(5, -4, 0);
             GameManager.lives--;
+        }
+    }
+
+    void Score()
+    {
+        if (Projectile.numOfCombo == 1)
+        {
+            timer += Time.deltaTime;
+            Debug.Log("Timer" + timer);
+        }
+        if (Projectile.numOfCombo == 2)
+        {
+            if (timer <= timeToCombo)
+            {
+                GameManager.scoreCombo++;
+                if (GameManager.scoreCombo >= 7) { GameManager.scoreCombo = 7; }
+                GameManager.score += GameManager.scoreCombo;
+                Projectile.numOfCombo = 1;
+            }
+            if (timer > timeToCombo)
+            {
+                GameManager.scoreCombo = 0;
+                Projectile.numOfCombo = 0;
+            }
+            timer = 0;
+            Debug.Log("Set timer = 0");
         }
     }
 }

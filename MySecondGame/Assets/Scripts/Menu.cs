@@ -10,6 +10,7 @@ public class Menu : MonoBehaviour
     public Button play;
     public Button pause;
     public Button resume;
+    public Button replay;
     public Button quit;
     public GameObject panel;
     public Text score;
@@ -40,6 +41,17 @@ public class Menu : MonoBehaviour
     public void ChangeDie(bool x)
     {
         endText.gameObject.SetActive(x);
+        //replay.gameObject.SetActive(x);
         pause.gameObject.SetActive(!x);
+    }
+
+    public void ChangeReplay(bool x)
+    {
+        endText.gameObject.SetActive(!x);
+        replay.gameObject.SetActive(!x);
+        pause.gameObject.SetActive(x);
+        livesText.gameObject.SetActive(x);
+        score.gameObject.SetActive(x);
+        scoreCombo.gameObject.SetActive(x);
     }
 }

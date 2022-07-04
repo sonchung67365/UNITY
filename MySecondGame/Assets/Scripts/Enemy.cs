@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
 
     void EnemyFireProjectile()
     {
-        if (Random.Range(0f, 4400f) < 1)
+        if (Random.Range(0f, 1400f) < 1)
         {
             SpawnBullet();
         }
