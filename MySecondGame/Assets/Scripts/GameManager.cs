@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject enemies;
     public Transform storage;
     public MusicManager music;
+    public static int score;
+    public static int scoreCombo;
     private void Start()
     {
         state = "Idle";

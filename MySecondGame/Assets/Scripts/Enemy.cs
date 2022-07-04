@@ -18,27 +18,14 @@ public class Enemy : MonoBehaviour
     {
         if (GameManager.state == "Play")
         {
-            timer += Time.deltaTime;
-            if (timer > timeToMove && numOfMove < 45)
-            {
-                transform.position += new Vector3(speed, 0, 0);
-                timer = 0;
-                numOfMove++;
-            }
-            if (numOfMove == 45)
-            {
-                transform.position += new Vector3(0, -0.2f, 0);
-                numOfMove = 0;
-                speed = -speed;
-                timer = 0;
-            }
+            MoveEnemy();
             EnemyFireProjectile();
         }
     }
 
     void EnemyFireProjectile()
     {
-        if (Random.Range(0f, 400f) < 1)
+        if (Random.Range(0f, 4400f) < 1)
         {
             SpawnBullet();
         }
@@ -52,5 +39,24 @@ public class Enemy : MonoBehaviour
             transform.position.y - 0.5f,
             transform.position.z);
         enemyProjectileClone.transform.SetParent(storage);
+    }
+
+    void MoveEnemy()
+    {
+        timer += Time.deltaTime;
+        //Debug.Log("timer: " + timer);
+        if (timer > timeToMove && numOfMove < 45)
+        {
+            transform.position += new Vector3(speed, 0, 0);
+            timer = 0;
+            numOfMove++;
+        }
+        if (numOfMove == 45)
+        {
+            transform.position += new Vector3(0, -0.2f, 0);
+            numOfMove = 0;
+            speed = -speed;
+            timer = 0;
+        }
     }
 }

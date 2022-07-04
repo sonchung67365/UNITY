@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Transform player;
+    public static int numOfCombo;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,7 +13,7 @@ public class Projectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.Translate(new Vector3(0, 5 * Time.deltaTime, 0));
         if ((transform.position.y - 10) > player.transform.position.y)
@@ -27,6 +28,18 @@ public class Projectile : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
+            numOfCombo++;
+            GameManager.score += 10;
         }
+        if (collision.gameObject.CompareTag("EnemyProjectile"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    void Score()
+    {
+
     }
 }

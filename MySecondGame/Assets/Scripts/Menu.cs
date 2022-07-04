@@ -12,15 +12,21 @@ public class Menu : MonoBehaviour
     public Button resume;
     public Button quit;
     public GameObject panel;
+    public Text score;
+    public Text scoreCombo;
     private void FixedUpdate()
     {
         livesText.text = "Lives: " + GameManager.lives.ToString();
+        score.text = "Score: " + GameManager.score.ToString();
+        scoreCombo.text = "Combo: " + GameManager.scoreCombo.ToString();
     }
     public void ChangeStart(bool x)
     {
         play.gameObject.SetActive(!x);
         pause.gameObject.SetActive(x);
         livesText.gameObject.SetActive(x);
+        score.gameObject.SetActive(x);
+        scoreCombo.gameObject.SetActive(x);
     }
 
     public void ChangePause(bool x)
